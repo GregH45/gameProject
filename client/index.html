@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>GameInit</title>
+</head>
+<body>
+	<form id="coForm">
+		<input type="text" name="charname" id="charname">
+		<input type="submit" name="">
+	</form>
+
+</body>
+	<script src="/socket.io/socket.io.js"></script>
+	<script type="text/javascript">
+		var socket = io()
+
+		let connectionForm = document.getElementById('coForm')
+		connectionForm.addEventListener('submit', (event) => {
+			
+			event.preventDefault()
+			
+			socket.emit('connected', {
+				user : {
+					name : document.getElementById('charname').value
+				}
+			})
+		})
+
+		socket.on('connectionStatus', (data) => {
+			console.log(data.isConnected)
+			if (data.isConnected)
+				alert("Welcome " + data.user )
+			else 
+				alert("User " + data.user + " already connected")
+		})
+	</script>
+</html>
+
