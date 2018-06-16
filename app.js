@@ -8,7 +8,12 @@ var users = []
 app.get('/', function(req, res) {
 	res.sendFile(__dirname + '/client/index.html')
 });
+app.get('/login', (req,res) => {
+	res.sendFile(__dirname + '/client/login.html')
+});
 app.use('/client', express.static(__dirname + '/client'))
+app.use('/js', express.static(__dirname + '/client/js'))
+
 srv.listen(2000)
 
 console.log('Server is now up on port 2000')
